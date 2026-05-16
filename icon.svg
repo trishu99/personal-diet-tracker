@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pink rounded square background -->
+  <rect width="100" height="100" fill="#fce4ec" rx="22"/>
+  <!-- Big pink heart (health + diet) -->
+  <path d="M50,84 C18,58 18,30 36,28 C45,27 50,35 50,42 C50,35 55,27 64,28 C82,30 82,58 50,84 Z" fill="#ec4899"/>
+  <!-- Green checkmark inside heart (tracker + healthy choice) -->
+  <path d="M35,52 L46,63 L65,42" stroke="#86efac" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

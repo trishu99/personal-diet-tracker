@@ -1,77 +1,70 @@
-# Mahima's Personal Diet Tracker
+# 💗 Mahima's Personal Diet Tracker
 
-A thyroid-aware diet + cycle + shopping tracker with Node.js backend for cross-device sync.
+A thyroid-aware diet tracker with meal plan, recipes, period cycle tracking, and shopping list. Free, simple, mobile-friendly.
 
-## Quick start (local)
+🔗 **Live**: https://trishu99.github.io/personal-diet-tracker/
 
+## Features
+
+- **7-day meal plan** with collapsible cards
+- **Recipes** with ingredients + steps for every dish
+- **Tonight's prep** — auto-detects what to soak/prepare for tomorrow
+- **Period cycle tracker** with phase-aware diet tips (menstrual / follicular / ovulation / luteal)
+- **Weekly shopping list** with category grouping and auto-aggregated quantities
+- **Water, supplements, weight, streak tracking**
+- **Thyroid quick-note** — what to eat ✅ / what to ease off ❌
+- **Browser notifications** for meal reminders
+- **PWA** — install to phone home screen for app-like experience
+
+## How it works
+
+- 100% free, runs entirely in the browser
+- Data stored in your browser's **localStorage** — private to each device
+- Hosted on **GitHub Pages** — no servers, no costs, no signup
+
+## Install on your phone
+
+1. Open https://trishu99.github.io/personal-diet-tracker/ in Safari (iPhone) or Chrome (Android)
+2. Share → **Add to Home Screen**
+3. The pink-heart icon appears like a native app
+
+## Edit content
+
+Open `data.js` to change meal plans, recipes, or shopping essentials. After editing:
 ```bash
-cd /Users/makothar/personal/personal-diet-tracker
-npm install
-npm start
+git add -A
+git commit -m "your change"
+git push
 ```
-
-Server prints:
-```
-🌸 Mahima's Diet Tracker — backend running
-   Local:     http://localhost:3000
-   On phone:  http://<your-laptop-ip>:3000   (same Wi-Fi)
-```
-
-Open the local URL in your browser, or the LAN URL on your phone (must be on same Wi-Fi).
-
-## How sync works
-
-- Frontend always writes to `localStorage` first (instant, works offline)
-- Then debounces a `POST /api/state` to the backend (700ms after last change)
-- On page load, frontend renders from `localStorage` immediately, then `GET /api/state` to pull latest
-- Tab focus refresh: when you switch back to the tab, it pulls latest from backend
-- Backend stores everything in `data/state.json` (one file, atomic writes)
-
-## Sync status indicator (header)
-
-| Badge | Meaning |
-|---|---|
-| 🟢 Synced | Backend reachable, latest changes saved |
-| 🟡 Syncing… | In-flight save or load |
-| ⚫ Offline | Backend unreachable; using localStorage only |
-| 🔴 Sync error | Backend reachable but request failed |
-| ⚫ Local only | No backend detected (opened as `file://`) |
-
-## API
-
-- `GET /api/state` → `{ state, updatedAt }` or `{ state: null }`
-- `POST /api/state` with `{ state }` → `{ ok: true, updatedAt }`
-- `GET /api/health` → `{ ok: true, hasData: bool }`
-
-No authentication — keep on local network only.
+Pages rebuilds in ~30s.
 
 ## Files
 
 ```
 .
-├── server.js           # Express backend
+├── index.html          # main page
+├── data.js             # meal plan, recipes, cycle phases
+├── app.js              # all interactive logic
+├── styles.css          # styling
+├── icon.svg            # app icon (pink heart + green check)
+├── server.js           # OPTIONAL local backend (see below)
 ├── package.json
-├── index.html          # served from same origin
-├── app.js
-├── data.js
-├── styles.css
-├── data/
-│   └── state.json      # auto-created, gitignored
-└── .gitignore
+└── .nojekyll
 ```
 
-## Deployment (when ready)
+## Optional: local cross-device sync
 
-GitHub Pages is **static-only** — it can't host this Node.js backend. Options for hosting the full app:
+If you want to sync data between phone and laptop (instead of independent localStorage per device), you can run the included Node backend locally:
 
-- **Render** (free 750hr/mo, spins down after 15 min): connect your GitHub repo, set start command `node server.js`. The backend + frontend serve from the same URL.
-- **Railway** ($5/mo credit): similar to Render.
-- **Fly.io** (generous free tier): one-time `fly launch` then `fly deploy`.
+```bash
+npm install
+npm start
+```
 
-For all three, you'll want a **persistent volume** mounted at `/app/data` so `state.json` survives restarts.
+Then open `http://localhost:3000` on laptop and `http://<your-ip>:3000` on phone (same Wi-Fi). The frontend will pick up the backend and show a green "Synced" pill.
 
-If you'd rather host frontend on GitHub Pages and use a hosted database instead, swap the backend for **Firebase Firestore** or **Supabase** — both have free tiers and the frontend talks to them directly. Let me know and I'll do that swap.
+This is optional — the live GitHub Pages site works perfectly with localStorage alone.
 
-## Stop the server
+## Tech
 
-`Ctrl+C` in the terminal.
+Vanilla JavaScript + Bootstrap 5 (accordion only) + zero build step. No frameworks, no bundlers, no dependencies in the published version.

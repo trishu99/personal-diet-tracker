@@ -67,15 +67,20 @@ function setSyncStatus(s) {
   syncStatus = s;
   const el = document.getElementById('sync-status');
   if (!el) return;
+  // Hide pill entirely when there's no backend (e.g. GitHub Pages).
+  // Only show it when sync is actually happening or available.
+  if (s === 'local' || s === 'unknown') {
+    el.style.display = 'none';
+    return;
+  }
+  el.style.display = '';
   const labels = {
-    unknown: { dot: '⚪', text: 'Checking…' },
     syncing: { dot: '🟡', text: 'Syncing…' },
     synced:  { dot: '🟢', text: 'Synced' },
     offline: { dot: '⚫', text: 'Offline' },
-    error:   { dot: '🔴', text: 'Sync error' },
-    local:   { dot: '⚫', text: 'Local only' }
+    error:   { dot: '🔴', text: 'Sync error' }
   };
-  const { dot, text } = labels[s] || labels.unknown;
+  const { dot, text } = labels[s] || { dot: '⚪', text: '' };
   el.innerHTML = `<span class="sync-dot">${dot}</span><span class="sync-text">${text}</span>`;
   el.className = `sync-status sync-${s}`;
   el.title = lastSyncedAt ? `Last synced: ${new Date(lastSyncedAt).toLocaleTimeString()}` : '';
