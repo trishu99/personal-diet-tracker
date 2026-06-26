@@ -298,6 +298,60 @@ function deleteLastCycle() {
   render();
 }
 
+function dateKeyFromDate(d) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+// Flatten all logged cycles into a Set of YYYY-MM-DD period days.
+function getPeriodDaySet() {
+  const set = new Set();
+  (state.period.cycles || []).forEach(c => {
+    const start = new Date(c.start + 'T00:00:00');
+    const end = c.end ? new Date(c.end + 'T00:00:00') : start;
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+      set.add(dateKeyFromDate(d));
+    }
+  });
+  return set;
+}
+
+// Rebuild {start, end} cycle ranges from a set of period days by grouping
+// contiguous runs. A run that ends on today is left "ongoing" (no end).
+function rebuildCyclesFromDaySet(daySet) {
+  const keys = Array.from(daySet).sort();
+  const todayKey = getTodayKey();
+  const cycles = [];
+  let runStart = null, prev = null;
+  const closeRun = () => {
+    const c = { start: runStart };
+    if (prev !== todayKey) c.end = prev;
+    cycles.push(c);
+  };
+  keys.forEach(k => {
+    if (runStart === null) { runStart = k; prev = k; return; }
+    if (daysBetween(prev, k) === 1) { prev = k; return; }
+    closeRun();
+    runStart = k; prev = k;
+  });
+  if (runStart !== null) closeRun();
+  return cycles;
+}
+
+// Toggle a single calendar day on/off as a period day.
+function togglePeriodDay(key) {
+  if (key > getTodayKey()) { showToast("Can't log a future date"); return; }
+  const set = getPeriodDaySet();
+  if (set.has(key)) set.delete(key);
+  else set.add(key);
+  state.period.cycles = rebuildCyclesFromDaySet(set);
+  const stats = getCycleStats();
+  if (stats.avgCycle) state.period.settings.avgCycleLength = stats.avgCycle;
+  if (stats.avgPeriod) state.period.settings.avgPeriodLength = stats.avgPeriod;
+  saveState();
+  refreshPeriodModal();
+  render();
+}
+
 function logSymptomToday(field, value) {
   const today = getTodayKey();
   if (!state.period.symptoms[today]) state.period.symptoms[today] = {};
@@ -1366,15 +1420,7 @@ function renderMiniCalendar() {
     days.push({ date: d, key });
   }
 
-  const periodDays = new Set();
-  state.period.cycles.forEach(c => {
-    const start = new Date(c.start);
-    const end = c.end ? new Date(c.end) : start;
-    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-      const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-      periodDays.add(k);
-    }
-  });
+  const periodDays = getPeriodDaySet();
 
   const info = getCyclePhase();
   const predictedDays = new Set();
@@ -1389,6 +1435,7 @@ function renderMiniCalendar() {
 
   const todayKey = getTodayKey();
   return `
+    <p class="cal-hint">Tap any day to mark or unmark your period 👇</p>
     <div class="mini-calendar">
       ${days.map(d => {
         const isPeriod = periodDays.has(d.key);
@@ -1396,7 +1443,7 @@ function renderMiniCalendar() {
         const isToday = d.key === todayKey;
         const cls = isPeriod ? 'period' : isPredicted ? 'predicted' : '';
         return `
-          <div class="cal-day ${cls} ${isToday ? 'today' : ''}" title="${d.key}${isPeriod ? ' · Period' : isPredicted ? ' · Predicted' : ''}">
+          <div class="cal-day ${cls} ${isToday ? 'today' : ''} clickable" data-cal-date="${d.key}" title="${d.key}${isPeriod ? ' · Period (tap to remove)' : ' · Tap to mark period'}">
             ${d.date.getDate()}
           </div>
         `;
@@ -1441,6 +1488,10 @@ function attachPeriodHandlers() {
   if (notes) {
     notes.onblur = () => logSymptomToday('notes', notes.value);
   }
+
+  document.querySelectorAll('.cal-day[data-cal-date]').forEach(cell => {
+    cell.onclick = () => togglePeriodDay(cell.dataset.calDate);
+  });
 
   const delBtn = document.getElementById('delete-last-cycle');
   if (delBtn) delBtn.onclick = deleteLastCycle;
