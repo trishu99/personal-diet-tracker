@@ -367,6 +367,111 @@ body {
   gap: 12px;
 }
 
+/* ---- Meal swap / "More options" picker ---- */
+.swapped-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--mahima);
+  background: var(--mahima-bg);
+  padding: 1px 7px;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.options-toggle {
+  display: block;
+  font-size: 12px;
+  color: var(--mahima);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 4px 0;
+  font-weight: 700;
+}
+
+.options-panel {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.options-hint {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 2px;
+  text-transform: capitalize;
+}
+
+.option-pick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 11px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.1s ease, background 0.1s ease;
+}
+
+.option-pick:hover {
+  border-color: var(--mahima);
+}
+
+.option-pick.active {
+  background: var(--mahima-bg);
+  border-color: var(--mahima);
+  font-weight: 600;
+}
+
+.option-check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+  color: white;
+  background: var(--muted);
+}
+
+.option-pick.active .option-check {
+  background: var(--mahima);
+}
+
+.option-food {
+  flex: 1;
+}
+
+.option-reset {
+  margin-top: 4px;
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
 .recipe-details {
   padding: 14px 16px;
   background: var(--bg);

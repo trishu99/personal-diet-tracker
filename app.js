@@ -13,6 +13,8 @@ let state = {
   weights: [],
   remindersEnabled: false,
   expandedRecipes: {},
+  expandedOptions: {},   // key: "Monday-6" → true if the swap picker is open
+  mealSwaps: {},         // key: "Monday-6" → { food, recipes } chosen alternative
   collapsedMeals: {},    // key: "Monday-0" → true if collapsed (default = expanded)
   prepDone: {},
   shopping: {},
@@ -474,6 +476,31 @@ function renderDayContent() {
     };
   });
 
+  // "More options" swap picker
+  main.querySelectorAll('.options-toggle').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.optionsId;
+      state.expandedOptions[id] = !state.expandedOptions[id];
+      saveState();
+      render();
+    };
+  });
+
+  main.querySelectorAll('.option-pick').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      applyMealSwap(parseInt(btn.dataset.slotIdx), btn.dataset.optType, parseInt(btn.dataset.optIdx));
+    };
+  });
+
+  main.querySelectorAll('.option-reset').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      resetMealSwap(parseInt(btn.dataset.resetSlot));
+    };
+  });
+
   // Sync Bootstrap accordion state back to localStorage (no re-render to avoid loops)
   main.querySelectorAll('.accordion-collapse').forEach(el => {
     el.addEventListener('shown.bs.collapse', () => {
@@ -502,7 +529,44 @@ function renderDayContent() {
   }
 }
 
-function renderMealCard(slot, i) {
+// Resolve a slot for a given day/index, applying any saved swap override.
+function getEffectiveSlot(dayName, i) {
+  const slot = WEEKLY_PLAN[dayName].slots[i];
+  const sw = state.mealSwaps && state.mealSwaps[`${dayName}-${i}`];
+  if (sw) return { ...slot, food: sw.food, recipes: sw.recipes || [], swapped: true };
+  return slot;
+}
+
+function applyMealSwap(i, type, optIdx) {
+  const opt = (MEAL_OPTIONS[type] || [])[optIdx];
+  if (!opt) return;
+  const swapId = `${state.selectedDay}-${i}`;
+  const defaultFood = WEEKLY_PLAN[state.selectedDay].slots[i].food;
+  if (!state.mealSwaps) state.mealSwaps = {};
+  if (opt.food === defaultFood) {
+    // Picked the original plan dish — clear any override.
+    delete state.mealSwaps[swapId];
+  } else {
+    state.mealSwaps[swapId] = { food: opt.food, recipes: opt.recipes || [] };
+  }
+  delete state.expandedOptions[swapId];   // collapse picker after choosing
+  delete state.expandedRecipes[swapId];   // recipe view may no longer match
+  saveState();
+  showToast('🍽️ Meal swapped');
+  render();
+}
+
+function resetMealSwap(i) {
+  const swapId = `${state.selectedDay}-${i}`;
+  if (state.mealSwaps) delete state.mealSwaps[swapId];
+  delete state.expandedRecipes[swapId];
+  saveState();
+  showToast('↩︎ Reset to plan default');
+  render();
+}
+
+function renderMealCard(slotArg, i) {
+  const slot = getEffectiveSlot(state.selectedDay, i);
   const key = mealKey(state.selectedDay, i);
   const collapseKey = `${state.selectedDay}-${i}`;
   const collapseId = `meal-collapse-${state.selectedDay}-${i}`;
@@ -518,6 +582,8 @@ function renderMealCard(slot, i) {
     </button>
     ${state.expandedRecipes[recipeId] ? renderRecipes(recipeKeys) : ''}
   ` : '';
+
+  const optionsHTML = renderMealOptions(slot, i);
 
   return `
     <div class="accordion-item meal-acc-item ${isDone ? 'done' : ''}">
@@ -546,12 +612,46 @@ function renderMealCard(slot, i) {
            data-collapse-key="${collapseKey}"
            aria-labelledby="meal-h-${collapseKey}">
         <div class="accordion-body">
-          <div class="meal-content">${slot.food || ''}</div>
+          <div class="meal-content">${slot.food || ''}${slot.swapped ? ' <span class="swapped-tag">swapped</span>' : ''}</div>
           ${recipeHTML}
+          ${optionsHTML}
         </div>
       </div>
     </div>
   `;
+}
+
+function renderMealOptions(slot, i) {
+  const opts = MEAL_OPTIONS[slot.type];
+  if (!opts || opts.length === 0) return '';
+  const optId = `${state.selectedDay}-${i}`;
+  const isOpen = !!state.expandedOptions[optId];
+
+  if (!isOpen) {
+    return `<button class="options-toggle" data-options-id="${optId}">🔄 More options</button>`;
+  }
+
+  const list = opts.map((opt, idx) => {
+    const active = opt.food === slot.food;
+    return `
+      <button class="option-pick ${active ? 'active' : ''}"
+              data-opt-type="${slot.type}" data-opt-idx="${idx}" data-slot-idx="${i}">
+        <span class="option-check">${active ? '✓' : '+'}</span>
+        <span class="option-food">${opt.food}</span>
+      </button>`;
+  }).join('');
+
+  const resetBtn = slot.swapped
+    ? `<button class="option-reset" data-reset-slot="${i}">↩︎ Reset to plan default</button>`
+    : '';
+
+  return `
+    <button class="options-toggle open" data-options-id="${optId}">▼ Hide options</button>
+    <div class="options-panel">
+      <div class="options-hint">Tap an option to swap this ${slot.type}:</div>
+      ${list}
+      ${resetBtn}
+    </div>`;
 }
 
 function renderRecipes(recipeKeys) {
@@ -707,7 +807,8 @@ function renderTonightPrepCard() {
 
   const prepItems = [];
   const seenKeys = new Set();
-  nextDayPlan.slots.forEach(slot => {
+  nextDayPlan.slots.forEach((_, idx) => {
+    const slot = getEffectiveSlot(nextDay, idx);
     if (!slot.recipes) return;
     slot.recipes.forEach(rKey => {
       if (seenKeys.has(rKey)) return;
@@ -986,9 +1087,11 @@ function clearAllReminders() {
 
 function scheduleReminders() {
   clearAllReminders();
-  const today = WEEKLY_PLAN[getTodayName()];
+  const todayName = getTodayName();
+  const today = WEEKLY_PLAN[todayName];
   const now = new Date();
-  today.slots.forEach(slot => {
+  today.slots.forEach((_, idx) => {
+    const slot = getEffectiveSlot(todayName, idx);
     const time = parseTimeToToday(slot.time);
     if (time > now) {
       const delay = time - now;
@@ -1047,7 +1150,8 @@ function fmtQty(num, unit) {
 function buildShoppingList() {
   const occ = {};
   DAYS_ORDER.forEach(day => {
-    WEEKLY_PLAN[day].slots.forEach(slot => {
+    WEEKLY_PLAN[day].slots.forEach((_, idx) => {
+      const slot = getEffectiveSlot(day, idx);
       if (!slot.recipes) return;
       slot.recipes.forEach(rKey => {
         if (!occ[rKey]) occ[rKey] = 0;

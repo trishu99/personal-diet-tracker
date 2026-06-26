@@ -498,54 +498,254 @@ const RECIPES = {
     tip: "Khichdi is comfort food + perfect post-workout + great for menstrual phase."
   },
 
-  "moong-dal-soup": {
-    name: "Moong Dal Soup",
+  "daliya-porridge": {
+    name: "Daliya (Broken Wheat) Porridge",
     prepAhead: [],
     ingredients: [
-      ["Yellow moong dal", "½ cup"],
-      ["Garlic (chopped)", "3 cloves"],
-      ["Ginger (grated)", "1 tsp"],
-      ["Tomato", "1"],
+      ["Broken wheat (daliya)", "⅓ cup"],
+      ["Milk", "1 cup"],
+      ["Water", "½ cup"],
+      ["Dates (chopped) or jaggery", "2"],
+      ["Chia seeds", "1 tsp"],
+      ["Almonds (chopped)", "5"],
+      ["Cardamom powder", "1 pinch"]
+    ],
+    steps: [
+      "Dry roast the daliya in a pan for 2-3 mins till fragrant.",
+      "Add water + milk, bring to a boil, then simmer.",
+      "Cook 10-12 mins, stirring, till soft and porridge-like.",
+      "Stir in chopped dates/jaggery and cardamom.",
+      "Top with chia and almonds. Serve warm."
+    ],
+    tip: "High-fibre, slow-release energy — keeps you full till lunch."
+  },
+
+  "ragi-porridge": {
+    name: "Ragi (Finger Millet) Porridge",
+    prepAhead: [],
+    ingredients: [
+      ["Ragi flour", "3 tbsp"],
+      ["Milk", "1 cup"],
+      ["Water", "½ cup"],
+      ["Jaggery or 2 dates", "1 tbsp"],
+      ["Almonds (chopped)", "5"],
+      ["Cardamom powder", "1 pinch"]
+    ],
+    steps: [
+      "Whisk ragi flour into the cold water — no lumps.",
+      "Cook on low, stirring constantly, 3-4 mins till it thickens and loses raw smell.",
+      "Add milk and jaggery/dates, simmer 3-4 mins.",
+      "Add cardamom, top with almonds. Serve warm."
+    ],
+    tip: "Calcium + iron rich — great for thyroid and menstrual phase."
+  },
+
+  "muesli-bowl": {
+    name: "Muesli + Curd + Fruit Bowl",
+    prepAhead: [],
+    ingredients: [
+      ["Unsweetened muesli", "⅓ cup"],
+      ["Curd (or milk)", "200 g"],
+      ["Apple or banana (chopped)", "1"],
+      ["Berries / pomegranate", "2 tbsp"],
+      ["Pumpkin seeds", "1 tbsp"],
+      ["Almonds (chopped)", "5"]
+    ],
+    steps: [
+      "Add muesli to a bowl.",
+      "Top with curd or milk.",
+      "Add chopped fruit, berries, seeds and almonds.",
+      "Mix and eat right away (or soak 10 mins for softer muesli)."
+    ],
+    tip: "No-cook, 3-minute breakfast. Pick muesli with no added sugar."
+  },
+
+  "bhindi-sabzi": {
+    name: "Bhindi (Okra) Sabzi",
+    prepAhead: [],
+    ingredients: [
+      ["Bhindi (okra), chopped", "250 g"],
+      ["Onion (sliced)", "1"],
       ["Turmeric", "¼ tsp"],
-      ["Black pepper", "½ tsp"],
-      ["Cumin", "½ tsp"],
-      ["Ghee", "1 tsp"],
-      ["Lemon", "½"],
-      ["Coriander", "1 tbsp"],
+      ["Red chilli powder", "½ tsp"],
+      ["Coriander powder", "1 tsp"],
+      ["Amchur (dry mango) powder", "½ tsp"],
+      ["Oil", "2 tsp"],
       ["Salt", "to taste"]
     ],
     steps: [
-      "Pressure cook dal with water, turmeric, salt, tomato (3 whistles).",
-      "Blend lightly with a hand-blender for a smoother soup.",
-      "Heat ghee, add cumin, garlic, ginger. Sauté till fragrant.",
-      "Add tadka to dal. Simmer 5 mins.",
-      "Add black pepper, squeeze lemon. Garnish with coriander.",
-      "Sip warm."
-    ]
+      "Wash bhindi and dry it fully (so it doesn't turn sticky). Chop into rings.",
+      "Heat oil, add bhindi, sauté on medium-high 6-8 mins till slime is gone.",
+      "Add onion, cook 3-4 mins.",
+      "Add turmeric, chilli, coriander powder and salt. Toss well.",
+      "Cook uncovered 4-5 mins, sprinkle amchur. Serve with roti."
+    ],
+    tip: "Keep the pan uncovered — covering makes bhindi slimy."
   },
 
-  "clear-veg-soup": {
-    name: "Clear Vegetable Soup",
+  "aloo-gobi": {
+    name: "Aloo Gobi (Potato-Cauliflower)",
     prepAhead: [],
     ingredients: [
-      ["Carrot (diced)", "½ cup"],
-      ["Cabbage (cooked, NOT raw — for thyroid)", "½ cup"],
-      ["Beans (chopped)", "¼ cup"],
-      ["Capsicum", "¼ cup"],
-      ["Garlic (chopped)", "3 cloves"],
-      ["Ginger (grated)", "1 tsp"],
-      ["Black pepper", "½ tsp"],
-      ["Vegetable stock or water", "3 cups"],
-      ["Salt", "to taste"],
-      ["Lemon", "¼"]
+      ["Cauliflower florets", "2 cups"],
+      ["Potato (cubed)", "1 medium"],
+      ["Onion (chopped)", "1"],
+      ["Tomato (chopped)", "1"],
+      ["Ginger-garlic paste", "1 tsp"],
+      ["Turmeric", "¼ tsp"],
+      ["Cumin", "½ tsp"],
+      ["Coriander powder", "1 tsp"],
+      ["Oil", "2 tsp"],
+      ["Salt", "to taste"]
     ],
     steps: [
-      "Heat 1 tsp oil. Add garlic and ginger, sauté 30 sec.",
-      "Add all veggies. Stir for 2 mins.",
-      "Pour stock/water, add salt and pepper.",
-      "Bring to boil, then simmer 8-10 mins till veggies are tender.",
-      "Squeeze lemon. Serve hot."
-    ]
+      "Heat oil, add cumin, then onion — sauté till golden.",
+      "Add ginger-garlic paste and tomato, cook till soft.",
+      "Add turmeric, coriander powder, salt.",
+      "Add potato and cauliflower, toss to coat.",
+      "Cover and cook on low 12-15 mins, stirring once, till tender.",
+      "Garnish with coriander. Serve with roti."
+    ],
+    tip: "Cauliflower should be cooked (not raw) — better for thyroid."
+  },
+
+  "lauki-sabzi": {
+    name: "Lauki (Bottle Gourd) Sabzi",
+    prepAhead: [],
+    ingredients: [
+      ["Lauki (peeled, cubed)", "2 cups"],
+      ["Onion (chopped)", "1"],
+      ["Tomato (chopped)", "1"],
+      ["Cumin", "½ tsp"],
+      ["Turmeric", "¼ tsp"],
+      ["Red chilli powder", "½ tsp"],
+      ["Oil", "2 tsp"],
+      ["Salt", "to taste"]
+    ],
+    steps: [
+      "Heat oil, add cumin, then onion — sauté till soft.",
+      "Add tomato, turmeric, chilli, salt — cook till mushy.",
+      "Add lauki cubes, toss well.",
+      "Cover and cook on low 12-15 mins (lauki releases water) till tender.",
+      "Garnish with coriander. Serve with roti or dal."
+    ],
+    tip: "Light and hydrating — easy on digestion for dinner."
+  },
+
+  "mix-veg-sabzi": {
+    name: "Mix Veg Sabzi",
+    prepAhead: [],
+    ingredients: [
+      ["Mixed veggies (carrot, beans, peas, capsicum)", "2.5 cups"],
+      ["Onion (chopped)", "1"],
+      ["Tomato (chopped)", "1"],
+      ["Ginger-garlic paste", "1 tsp"],
+      ["Turmeric", "¼ tsp"],
+      ["Cumin", "½ tsp"],
+      ["Garam masala", "¼ tsp"],
+      ["Oil", "2 tsp"],
+      ["Salt", "to taste"]
+    ],
+    steps: [
+      "Heat oil, add cumin, then onion — sauté till golden.",
+      "Add ginger-garlic paste and tomato, cook till soft.",
+      "Add turmeric, salt and all veggies. Toss.",
+      "Cover and cook on low 12-15 mins till tender.",
+      "Sprinkle garam masala. Serve with roti."
+    ],
+    tip: "Use whatever veg is in the fridge — great clean-out meal."
+  },
+
+  "palak-paneer": {
+    name: "Palak Paneer (Light)",
+    prepAhead: [],
+    ingredients: [
+      ["Spinach (palak)", "1 large bunch"],
+      ["Paneer (cubed)", "75 g"],
+      ["Onion (chopped)", "1"],
+      ["Tomato", "1"],
+      ["Ginger-garlic paste", "1 tsp"],
+      ["Cumin", "½ tsp"],
+      ["Garam masala", "¼ tsp"],
+      ["Oil", "2 tsp"],
+      ["Salt", "to taste"]
+    ],
+    steps: [
+      "Blanch spinach in hot water 2 mins, then blend to a purée.",
+      "Heat oil, add cumin, onion — sauté till golden.",
+      "Add ginger-garlic paste and tomato, cook till soft.",
+      "Add spinach purée, salt, garam masala. Simmer 5 mins.",
+      "Add paneer cubes, cook 2-3 mins (don't overcook). Serve with roti."
+    ],
+    tip: "Iron-rich — excellent for the menstrual phase."
+  },
+
+  "jeera-aloo": {
+    name: "Jeera Aloo (Cumin Potatoes)",
+    prepAhead: ["Boil 2 potatoes ahead and refrigerate"],
+    ingredients: [
+      ["Boiled potatoes (cubed)", "2 medium"],
+      ["Cumin", "1 tsp"],
+      ["Turmeric", "¼ tsp"],
+      ["Red chilli powder", "½ tsp"],
+      ["Amchur powder", "½ tsp"],
+      ["Coriander (chopped)", "2 tbsp"],
+      ["Oil", "2 tsp"],
+      ["Salt", "to taste"]
+    ],
+    steps: [
+      "Heat oil, add cumin and let it splutter.",
+      "Add turmeric, chilli, salt — stir 10 sec.",
+      "Add boiled potato cubes, toss to coat.",
+      "Cook 4-5 mins till lightly crisp at edges.",
+      "Sprinkle amchur and coriander. Serve with roti or dal."
+    ],
+    tip: "Quick side when you're short on time — uses pre-boiled potatoes."
+  },
+
+  "curd-rice": {
+    name: "Curd Rice (Light Dinner)",
+    prepAhead: [],
+    ingredients: [
+      ["Cooked rice (cooled)", "1 cup"],
+      ["Curd", "¾ cup"],
+      ["Cucumber / carrot (grated)", "3 tbsp"],
+      ["Mustard seeds", "½ tsp"],
+      ["Curry leaves", "6"],
+      ["Green chilli", "1"],
+      ["Oil", "1 tsp"],
+      ["Salt", "to taste"]
+    ],
+    steps: [
+      "Mash cooled rice lightly, mix in curd, grated veg and salt.",
+      "Heat oil, add mustard seeds, curry leaves and green chilli for tadka.",
+      "Pour tadka over the curd rice and mix.",
+      "Serve cool — soothing and gut-friendly."
+    ],
+    tip: "Probiotic and easy to digest — gentle light dinner."
+  },
+
+  "veg-daliya": {
+    name: "Savoury Vegetable Daliya",
+    prepAhead: [],
+    ingredients: [
+      ["Broken wheat (daliya)", "⅓ cup"],
+      ["Mixed veggies (carrot, peas, beans)", "1 cup"],
+      ["Onion (chopped)", "1 small"],
+      ["Cumin", "½ tsp"],
+      ["Turmeric", "¼ tsp"],
+      ["Ghee or oil", "1 tsp"],
+      ["Water", "1.5 cups"],
+      ["Salt", "to taste"]
+    ],
+    steps: [
+      "Dry roast daliya 2-3 mins till fragrant; set aside.",
+      "Heat ghee, add cumin, then onion — sauté till soft.",
+      "Add veggies, turmeric, salt — stir 2 mins.",
+      "Add daliya and water, pressure cook 2 whistles (or simmer covered 15 mins).",
+      "Fluff and serve warm with curd."
+    ],
+    tip: "One-pot, high-fibre savoury meal — great light dinner."
   },
 
   "paneer-salad-bowl": {
@@ -780,8 +980,8 @@ const WEEKLY_PLAN = {
         food: "Curd bowl: 200g curd + apple + seeds + 5 almonds + 2 tbsp oats",
         recipes: ["curd-bowl"] },
       { time: "8:00 PM", type: "dinner", title: "Dinner",
-        food: "Stir-fry veggies + grilled paneer (75g) + clear veg soup",
-        recipes: ["stir-fry-veggies", "grilled-paneer", "clear-veg-soup"] },
+        food: "Stir-fry veggies + grilled paneer (75g)",
+        recipes: ["stir-fry-veggies", "grilled-paneer"] },
       { time: "9:30 PM", type: "walk", title: "Night Walk", food: "15-20 min easy walk" }
     ]
   },
@@ -822,8 +1022,8 @@ const WEEKLY_PLAN = {
         food: "Sprouts chaat (steamed for thyroid-friendly)",
         recipes: ["sprouts-chaat"] },
       { time: "8:00 PM", type: "dinner", title: "Dinner",
-        food: "Paneer salad bowl + veg soup",
-        recipes: ["paneer-salad-bowl", "clear-veg-soup"] },
+        food: "Paneer salad bowl + roasted pumpkin seeds",
+        recipes: ["paneer-salad-bowl"] },
       { time: "9:30 PM", type: "walk", title: "Night Walk", food: "20 min walk" }
     ]
   },
@@ -866,8 +1066,8 @@ const WEEKLY_PLAN = {
         food: "Curd bowl (200g) + seeds + fruit",
         recipes: ["curd-bowl"] },
       { time: "8:00 PM", type: "dinner", title: "Dinner",
-        food: "Small khichdi + veg soup",
-        recipes: ["veg-khichdi", "clear-veg-soup"] },
+        food: "Small khichdi + cucumber-tomato salad + curd",
+        recipes: ["veg-khichdi"] },
       { time: "9:30 PM", type: "walk", title: "Night Walk", food: "20 min walk" }
     ]
   },
@@ -888,8 +1088,8 @@ const WEEKLY_PLAN = {
         food: "Sprouts chaat",
         recipes: ["sprouts-chaat"] },
       { time: "8:00 PM", type: "dinner", title: "Dinner",
-        food: "Veg soup + grilled paneer (60g)",
-        recipes: ["clear-veg-soup", "grilled-paneer"] },
+        food: "Grilled paneer (60g) + sautéed veggies",
+        recipes: ["grilled-paneer", "sauteed-veggies"] },
       { time: "9:30 PM", type: "walk", title: "Night Walk", food: "20-30 min walk" }
     ]
   },
@@ -907,14 +1107,73 @@ const WEEKLY_PLAN = {
         recipes: ["paneer-sabzi", "dal-tadka"] },
       { time: "5:00 PM", type: "snack", title: "Evening Snack", food: "Mixed nuts + roasted seeds + herbal tea" },
       { time: "8:00 PM", type: "dinner", title: "Dinner — Light",
-        food: "Salad bowl + dal soup",
-        recipes: ["moong-dal-soup"] },
+        food: "Salad bowl + moong dal + 1 roti",
+        recipes: ["dal-tadka"] },
       { time: "9:30 PM", type: "walk", title: "Night Walk", food: "Light walk" }
     ]
   }
 };
 
 const DAYS_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+// ============================================
+// SWAP OPTIONS — alternatives per meal type.
+// Used by the "More options" picker on each meal.
+// (No soup — Mahima doesn't like it.)
+// ============================================
+const MEAL_OPTIONS = {
+  breakfast: [
+    { food: "Veg poha + peanuts", recipes: ["poha"] },
+    { food: "Vegetable upma", recipes: ["upma"] },
+    { food: "Daliya (broken wheat) porridge + nuts", recipes: ["daliya-porridge"] },
+    { food: "Ragi porridge + almonds", recipes: ["ragi-porridge"] },
+    { food: "Masala oats with veggies", recipes: ["oatmeal-bowl"] },
+    { food: "Overnight oats + chia + berries", recipes: ["overnight-oats"] },
+    { food: "Muesli + curd + fruit bowl", recipes: ["muesli-bowl"] },
+    { food: "Cornflakes + milk + banana + nuts" },
+    { food: "Savoury vegetable daliya + curd", recipes: ["veg-daliya"] },
+    { food: "Besan chilla (with veggies) + paneer cubes (50g)", recipes: ["besan-chilla", "mint-chutney"] },
+    { food: "2 moong dal chilla with paneer stuffing", recipes: ["moong-dal-chilla", "mint-chutney"] },
+    { food: "2 idli + sambar + paneer cubes (50g)", recipes: ["idli", "sambar"] },
+    { food: "Paneer bhurji (75g) + 1 multigrain toast", recipes: ["paneer-bhurji"] }
+  ],
+  lunch: [
+    { food: "2 roti + bhindi sabzi + salad", recipes: ["bhindi-sabzi"] },
+    { food: "2 roti + aloo gobi + curd", recipes: ["aloo-gobi"] },
+    { food: "2 roti + mix-veg sabzi + salad", recipes: ["mix-veg-sabzi"] },
+    { food: "1 roti + lauki sabzi + ½ cup dal", recipes: ["lauki-sabzi", "dal-tadka"] },
+    { food: "1 roti + palak paneer + salad", recipes: ["palak-paneer"] },
+    { food: "1 roti + paneer sabzi (75g) + cucumber salad", recipes: ["paneer-sabzi"] },
+    { food: "½ cup dal + 1 roti + jeera aloo + salad", recipes: ["dal-tadka", "jeera-aloo"] },
+    { food: "Rajma (½ cup) + small rice + salad", recipes: ["rajma-curry"] },
+    { food: "Chole (½ cup) + 1 roti + salad", recipes: ["chole-curry"] },
+    { food: "Veg khichdi + curd + salad", recipes: ["veg-khichdi"] }
+  ],
+  dinner: [
+    { food: "2 roti + bhindi sabzi + salad", recipes: ["bhindi-sabzi"] },
+    { food: "1 roti + lauki sabzi + curd", recipes: ["lauki-sabzi"] },
+    { food: "1 roti + mix-veg sabzi", recipes: ["mix-veg-sabzi"] },
+    { food: "1 roti + palak paneer", recipes: ["palak-paneer"] },
+    { food: "Grilled paneer (75g) + sautéed veggies", recipes: ["grilled-paneer", "sauteed-veggies"] },
+    { food: "Paneer salad bowl", recipes: ["paneer-salad-bowl"] },
+    { food: "Veg khichdi + curd", recipes: ["veg-khichdi"] },
+    { food: "Stir-fry veggies + grilled paneer (75g)", recipes: ["stir-fry-veggies", "grilled-paneer"] },
+    { food: "½ cup moong dal + 1 roti + salad", recipes: ["dal-tadka"] },
+    { food: "Curd rice + cucumber", recipes: ["curd-rice"] },
+    { food: "Savoury vegetable daliya + curd", recipes: ["veg-daliya"] }
+  ],
+  snack: [
+    { food: "Curd bowl: 200g curd + apple + seeds + almonds", recipes: ["curd-bowl"] },
+    { food: "Roasted makhana (1 cup) + green tea", recipes: ["roasted-makhana"] },
+    { food: "Sprouts chaat (steamed)", recipes: ["sprouts-chaat"] },
+    { food: "1 apple + 1 tsp peanut butter" },
+    { food: "Roasted chana (1 bowl) + green tea" },
+    { food: "Handful almonds + walnuts + 1 fruit" },
+    { food: "Buttermilk + handful makhana" },
+    { food: "Paneer cubes (50g) + cucumber slices" },
+    { food: "Coconut water + 1 fruit" }
+  ]
+};
 
 // ============================================
 // SHOPPING — daily-use items NOT in recipes
